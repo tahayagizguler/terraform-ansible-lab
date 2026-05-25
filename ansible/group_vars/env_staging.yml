@@ -1,0 +1,2 @@
+app_environment: staging
+nginx_port: 80

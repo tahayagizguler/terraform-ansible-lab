@@ -1,0 +1,32 @@
+---
+- name: Tum paketleri guncelle
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+
+- name: Temel araclari kur
+  ansible.builtin.dnf:
+    name:
+      - git
+      - htop
+      - vim
+      - wget
+    state: present
+
+- name: Deploy user olustur
+  ansible.builtin.user:
+    name: deploy
+    shell: /bin/bash
+    groups: wheel
+    append: yes
+    create_home: yes
+
+- name: Deploy user sudo yetkisi
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/deploy
+    content: "deploy ALL=(ALL) NOPASSWD:ALL"
+    mode: "0440"
+
+- name: Timezone ayarla
+  ansible.builtin.timezone:
+    name: Europe/Istanbul

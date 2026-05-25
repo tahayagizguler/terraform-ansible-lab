@@ -5,8 +5,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../_base"
-  # hangi main.tf'i kullanacağını söylüyor
+  source = "${get_repo_root()}/_base"
 }
 
 inputs = {

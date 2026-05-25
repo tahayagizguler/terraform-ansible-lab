@@ -1,15 +1,20 @@
-data "aws_ami" "amazon_linux" {
+data "aws_ami" "al2023" {
   most_recent = true
   owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
 resource "aws_instance" "main" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = data.aws_ami.al2023.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.sg_id]
@@ -19,5 +24,6 @@ resource "aws_instance" "main" {
     Name        = "${var.environment}-server"
     Environment = var.environment
     ManagedBy   = "terraform"
+    Project     = "terraform-lab"
   }
 }

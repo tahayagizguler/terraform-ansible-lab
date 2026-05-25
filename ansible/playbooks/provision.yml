@@ -1,0 +1,10 @@
+---
+- name: Instance provisioning
+  hosts: aws_ec2
+  become: true
+  vars:
+    app_environment: "{{ tags.Environment }}"
+
+  roles:
+    - common
+    - webserver

@@ -1,0 +1,23 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
+crash.log
+override.tf
+override.tf.json
+
+# Terragrunt
+.terragrunt-cache/
+
+# Ansible
+*.retry
+ansible/inventory/*.cache
+
+# SSH keys
+*.pem
+
+# OS
+.DS_Store
+*.swp

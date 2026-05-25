@@ -1,7 +1,11 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
-  enable_dns_hostnames = true # Required for EC2 instances to have public DNS names
-  enable_dns_support   = true # same as above, but for DNS resolution
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
   tags = {
     Name        = "${var.environment}-vpc"
@@ -13,6 +17,7 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "main" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1) #/24 subnet. cidrsubnet() Fonksiyonu Neden Kullanıldı? esneklik, otomasyon ve insan hatasını önlemektir. CIDR bloklarını manuel olarak hesaplamak yerine, cidrsubnet() fonksiyonu ile otomatik olarak oluşturulabilir. Bu, özellikle büyük ve karmaşık ağ yapılarında hataları azaltır ve yönetimi kolaylaştırır.
+  availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true #Public subnet
 
   tags = {

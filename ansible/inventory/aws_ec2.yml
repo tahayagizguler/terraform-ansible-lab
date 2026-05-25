@@ -1,0 +1,23 @@
+plugin: amazon.aws.aws_ec2
+
+regions:
+  - us-east-1
+
+filters:
+  tag:ManagedBy:
+    - terraform
+  instance-state-name:
+    - running
+
+keyed_groups:
+  - key: tags.Environment
+    prefix: env
+    separator: "_"
+
+hostnames:
+  - tag:Name
+  - public-ip-address
+
+compose:
+  ansible_host: public_ip_address
+  environment: tags.Environment
