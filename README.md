@@ -34,4 +34,4 @@ cd live && terragrunt run-all destroy
 
 ## Blog Post
 
-Full walkthrough: [Terraform + Terragrunt + Ansible: A Hands-On Learning Journey](#)
+Full walkthrough: [Terraform + Terragrunt + Ansible: A Hands-On Learning Journey](https://dev.to/tahayagizguler/terraform-terragrunt-ansible-a-hands-on-learning-journey-jed)
